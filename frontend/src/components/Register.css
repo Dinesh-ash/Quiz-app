@@ -1,0 +1,86 @@
+/* Body style */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark background for the page */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Register container with background image */
+.register-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url('../assets/register-bg.jpg') no-repeat center center fixed; /* Background image for register page */
+    background-size: cover; /* Full-screen background */
+}
+
+/* Register form container */
+.register-form {
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Register header */
+.register-header {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #ffcc00; /* Bright accent color */
+}
+
+/* Input fields */
+.register-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+.register-input:focus {
+    outline: none;
+    border-color: #ffcc00;
+}
+
+/* Submit button */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    color: #121212;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.register-btn:hover {
+    background-color: #ffa500;
+}
+
+.register-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Message (Success/Error) */
+.register-message {
+    color: #f44336;
+    margin-top: 10px;
+}
+
+/* Make the message green if registration is successful */
+.register-message.success {
+    color: #4caf50;
+}

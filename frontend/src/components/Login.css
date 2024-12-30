@@ -1,0 +1,85 @@
+/* Body style */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212; /* Dark background for the login page */
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+/* Login container */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('../assets/login-bg.jpg') no-repeat center center fixed; /* Background image for the login page */
+    background-size: cover; /* Full-screen background */
+}
+
+/* Login form container */
+.login-form {
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background for the form */
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Login header */
+.login-header {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #ffcc00; /* Bright accent color */
+}
+
+/* Input fields */
+.login-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #ffcc00;
+}
+
+/* Submit button */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    color: #121212;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+    background-color: #ffa500;
+}
+
+.login-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Message (Success/Error) */
+.login-message {
+    color: #f44336;
+    margin-top: 10px;
+}
+
+/* Make the message green if login is successful */
+.login-message.success {
+    color: #4caf50;
+}
