@@ -1,0 +1,95 @@
+/* Container for the quiz */
+.quiz-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative; /* To position timer within the container */
+}
+
+/* Header section for question and timer */
+.quiz-header-container {
+    position: fixed; /* Fixes the timer at the top of the page */
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff0000; /* Timer color */
+    z-index: 2; /* Ensure it stays on top */
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Add semi-transparent background */
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Styling for the question */
+.quiz-question {
+    font-size: 24px;
+    color: #333333;
+    margin-top: 80px; /* Adjust this value to create space between the timer and the question */
+    margin-bottom: 20px;
+}
+
+/* Styling for the options */
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-option {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.quiz-option:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.quiz-option:active {
+    background-color: #004080;
+}
+
+/* Styling for the quiz completion screen */
+.quiz-completion {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.quiz-header {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.quiz-score {
+    font-size: 20px;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.quiz-completion p {
+    font-size: 16px;
+    color: #ffcc00;
+}
+
+/* Styling for the timer */
+.timer {
+    font-size: 18px;
+    color: #ff0000; /* Red color for timer */
+}
+
+/* Disable text selection to prevent copying */
+.quiz-container {
+    user-select: none; /* Prevent selecting text */
+}
