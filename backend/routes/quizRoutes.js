@@ -1,19 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const Question = require('../models/Question');
+const Question = require('../models/Question'); // Import the Question model
 
-// Fetch all questions
+// Route to fetch quiz questions from MongoDB
 router.get('/', async (req, res) => {
-    const { category, difficulty } = req.query;
-    const filters = {};
-    if (category) filters.category = category;
-    if (difficulty) filters.difficulty = difficulty;
-
     try {
-        const questions = await Question.find(filters);
-        res.json(questions);
+        const questions = await Question.find();  // Fetch all questions from MongoDB
+        res.json(questions);  // Return the questions as JSON response
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        console.error('Error fetching questions:', err);
+        res.status(500).json({ message: 'Error fetching questions', error: err });
     }
 });
 

@@ -1,17 +1,13 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
-const UserSchema = new mongoose.Schema({
+// Define the schema for the User
+const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    role: { type: String, default: 'user' }, // Default role is 'user'
 });
 
-// Hash password before saving
-UserSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-});
+// No need for hashing the password anymore, store it as plaintext directly
+const User = mongoose.model('User', userSchema);
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = User;

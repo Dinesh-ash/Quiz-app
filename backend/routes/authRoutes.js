@@ -1,47 +1,62 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-// User Registration
+// Register route
 router.post('/register', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const userExists = await User.findOne({ email });
-        if (userExists) return res.status(400).json({ message: 'Email already exists' });
+    const { email, password, role } = req.body;
 
-        const user = new User({ email, password });
-        await user.save();
+    try {
+        // Check if user already exists
+        const userExists = await User.findOne({ email });
+        if (userExists) return res.status(400).json({ message: 'User already exists' });
+
+        // Create new user with plaintext password
+        const newUser = new User({
+            email,
+            password,  // Store plaintext password
+            role: role || 'user'  // Default to 'user' if no role is provided
+        });
+
+        // Save the user to the database
+        await newUser.save();
+
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
-        res.status(500).json({ message: 'Error registering user', error: err.message });
+        res.status(500).json({ message: 'Error registering user', error: err });
     }
 });
 
-// User Login
+
+// POST route for user login
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    if (!email || !password) {
-        return res.status(400).json({ message: 'Email and password are required' });
-    }
 
     try {
+        // Find the user by email
         const user = await User.findOne({ email });
-        if (!user) {
+        if (!user) return res.status(400).json({ message: 'Invalid email or password' });
+
+        // Directly compare entered password with stored plaintext password
+        if (password !== user.password) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.status(400).json({ message: 'Invalid email or password' });
-        }
+        // Create JWT token with user ID and role
+        const token = jwt.sign(
+            { userId: user._id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }  // Token expires in 1 hour
+        );
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.json({ token, message: 'Login successful' });
+        res.json({ token });  // Send the token back to the frontend
     } catch (err) {
-        res.status(500).json({ message: 'Server error', error: err.message });
+        console.error(err);
+        res.status(500).json({ message: 'Server error' });
     }
 });
+
 
 module.exports = router;
