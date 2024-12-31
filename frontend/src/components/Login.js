@@ -29,30 +29,31 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setMessage('');  // Clear any previous messages
+        setMessage('');
+    
+        // Ensure email and password are provided
+        if (!email || !password) {
+            setMessage('Please enter both email and password');
+            setLoading(false);
+            return;
+        }
+    
         try {
             const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
-            localStorage.setItem('token', res.data.token);  // Save the token
+    
+            // Store token in localStorage
+            localStorage.setItem('token', res.data.token);
+    
             setMessage('Login Successful!');
-            
-            // Redirect to the Quiz page after successful login
-            navigate('/quiz');
+            navigate('/quiz');  // Redirect to the quiz page
         } catch (err) {
-            // Logging the error for debugging
-            console.error('Login Error:', err);
-            
-            // Provide a more user-friendly error message
-            if (err.response) {
-                setMessage(`Error: ${err.response.data.message || 'Login failed!'}`);
-            } else if (err.request) {
-                setMessage('Error: No response from the server.');
-            } else {
-                setMessage(`Error: ${err.message}`);
-            }
+            // Show detailed error message from backend
+            setMessage(err.response?.data?.message || 'Login failed!');
         } finally {
             setLoading(false);
         }
     };
+    
 
     return (
         <div className="login-container">

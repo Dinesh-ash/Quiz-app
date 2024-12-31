@@ -90,7 +90,7 @@ const CodeQuiz = () => {
                                 className="quiz-option"
                                 onClick={() => handleAnswer(index === questions[currentQuestion].correctOption)}  // Check if answer is correct
                             >
-                                {option}
+                                {option}    
                             </button>
                         ))}
                     </div>
