@@ -1,0 +1,8 @@
+# Ignore node_modules folder
+node_modules/
+
+# Ignore the cache files created by development tools
+**/node_modules/.cache/
+# Ignore node_modules and cache files
+node_modules/
+frontend/node_modules/
